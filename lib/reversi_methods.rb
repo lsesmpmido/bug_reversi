@@ -56,6 +56,7 @@ module ReversiMethods
     end
 
     copy_board(board, copied_board) if !dry_run && turn_succeed
+
     turn_succeed
   end
 
