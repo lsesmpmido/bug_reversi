@@ -56,7 +56,6 @@ module ReversiMethods
     end
 
     copy_board(board, copied_board) if !dry_run && turn_succeed
-
     turn_succeed
   end
 
@@ -74,7 +73,19 @@ module ReversiMethods
   end
 
   def finished?(board)
-    !placeable?(board, WHITE_STONE) && !placeable?(board, BLACK_STONE)
+    cnt_white_stone = count_stone(board, WHITE_STONE)
+    cnt_black_stone = count_stone(board, BLACK_STONE)
+    all_stone = cnt_white_stone + cnt_black_stone
+
+    if cnt_white_stone.zero?
+      true
+    elsif cnt_black_stone.zero?
+      true
+    elsif all_stone.equal?(64)
+      true
+    else
+      false
+    end
   end
 
   def placeable?(board, attack_stone_color)
