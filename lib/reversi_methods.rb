@@ -75,19 +75,7 @@ module ReversiMethods
   end
 
   def finished?(board)
-    cnt_white_stone = count_stone(board, WHITE_STONE)
-    cnt_black_stone = count_stone(board, BLACK_STONE)
-    all_stone = cnt_white_stone + cnt_black_stone
-
-    if cnt_white_stone.zero?
-      true
-    elsif cnt_black_stone.zero?
-      true
-    elsif all_stone.equal?(64)
-      true
-    else
-      false
-    end
+    !placeable?(board, WHITE_STONE) && !placeable?(board, BLACK_STONE)
   end
 
   def placeable?(board, attack_stone_color)
@@ -99,6 +87,7 @@ module ReversiMethods
         return true if put_stone(board, position.to_cell_ref, attack_stone_color, dry_run: true)
       end
     end
+    false
   end
 
   def count_stone(board, stone_color)
